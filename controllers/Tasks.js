@@ -1,5 +1,4 @@
 const User = require("../model/userSchema")
-const Product = require("../model/productSchema")
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
@@ -90,20 +89,4 @@ module.exports.loginTask = async (req, res) => {
     }
 }
 
-
-module.exports.getTasks = async (req, res) => {
-    const tasks = await Product.find();
-    if (!tasks) {
-        res.json({
-            status: "FAILED",
-            message: "Data not found"
-        })
-    }
-    else {
-        res.json({
-            status: "SUCCESS",
-            message: "Records are shown aside!",
-            data: tasks
-        })
-    }
 }
