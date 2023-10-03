@@ -3,12 +3,13 @@ require('../db/conn');
 const router = Router()
 
 const {
+    getTasks,
     registerTask,
-    loginTask,
-    submitForm } = require('../controllers/Tasks');
+    loginTask
+} = require('../controllers/Tasks');
 
+router.get('/get', getTasks);
 router.post('/registerUser', registerTask);
 router.post('/loginUser', loginTask);
-router.post('/contactUser', submitForm);
 
 module.exports = router;

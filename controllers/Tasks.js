@@ -1,5 +1,5 @@
 const User = require("../model/userSchema")
-const ContactUser = require("../model/contactSchema")
+const Product = require("../model/productSchema")
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
@@ -90,27 +90,20 @@ module.exports.loginTask = async (req, res) => {
     }
 }
 
-module.exports.submitForm = async (req, res) => {
-    try {
-        const Formdata = new ContactUser(req.body)
-        const result = await Formdata.save()
 
-        if (!result) {
-            res.json({
-                status: "FAILED",
-                message: "Server Error"
-            })
-        }
-        else {
-            res.json({
-                status: "SUCCESS",
-                message: "Message sent successfully!"
-            })
-        }
+module.exports.getTasks = async (req, res) => {
+    const tasks = await Product.find();
+    if (!tasks) {
+        res.json({
+            status: "FAILED",
+            message: "Data not found"
+        })
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Server Error' });
+    else {
+        res.json({
+            status: "SUCCESS",
+            message: "Records are shown aside!",
+            data: tasks
+        })
     }
-
 }
